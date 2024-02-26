@@ -1,4 +1,4 @@
-python ../evaluate.py \
+python ../src/evaluation/evaluate.py \
 --gpt_type gpt-4-1106-preview \
 --model_name Llama-2-7b-chat-hf \
 --input_path [Folder path to target model generated output] \

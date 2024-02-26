@@ -1,8 +1,10 @@
-import os
+import os, sys
 import pandas as pd
 from tqdm import tqdm
 import fire, time
+from pathlib import Path
 from utils import get_prompt
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 
 def main(
@@ -13,7 +15,7 @@ def main(
     save_path: str, # "Folder path to save GPT evaluated result of target model output."
 ):
     
-    from gpt4_setup import generate_prompt, make_answer_gpt
+    from gpt.gpt_setup import generate_prompt, make_answer_gpt
     
     df = pd.read_csv(os.path.join(input_path, file_name))
     eval_col = f"{model_name}_gpt4_eval"
@@ -26,7 +28,7 @@ def main(
         output = row[model_name]
         sample = {"output": output, "choices": choices, "answer": answer_letter + ". " + row[f"choice_{answer_letter}"]}
 
-        text = get_prompt(gpt_type, "evaluate").format_map(sample)
+        text = get_prompt(gpt_type).format_map(sample)
 
         message = generate_prompt(text)
         result = make_answer_gpt(message, gpt_type, 15).strip()

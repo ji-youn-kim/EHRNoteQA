@@ -1,10 +1,11 @@
-import os
+import os, sys
 import pandas as pd
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import fire, time
+from pathlib import Path
 from utils import get_prompt
-
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 def main(
 	ckpt_dir: str, # "Folder path to target model for evaluation. You may put an empty string when evaluating gpt series models."
@@ -15,7 +16,7 @@ def main(
 ):
 	
 	if "gpt" in model_name:
-		from gpt4_setup import generate_prompt, make_answer_gpt
+		from gpt.gpt_setup import generate_prompt, make_answer_gpt
 		
 	else:
 		tokenizer = AutoTokenizer.from_pretrained(
@@ -60,7 +61,7 @@ def main(
 		sample = {"note": note, "question": row["question"], "choice_a": row["choice_A"], "choice_b": row["choice_B"],
                     "choice_c": row["choice_C"], "choice_d": row["choice_D"], "choice_e": row["choice_E"]}
 	
-		text = get_prompt(model_name, "generate").format_map(sample)
+		text = get_prompt(model_name).format_map(sample)
 
 		if "gpt" in model_name:
 			message = generate_prompt(text)
