@@ -58,9 +58,9 @@ Adjust the model and file names according to the target evaluation model and the
 Set the environment variables as previously described if not already done.\
 You must use HIPAA-compliant platforms such as Azure.
 ```
-export AZURE_OPENAI_ENDPOINT=[Your Azure Openai Endpoint]
-export AZURE_OPENAI_KEY=[Your Azure Openai Key]
-export AZURE_API_VERSION=[Youre Azure API Version]
+export AZURE_OPENAI_ENDPOINT=[Your Endpoint]
+export AZURE_OPENAI_KEY=[Your Key]
+export AZURE_API_VERSION=[Your API Version]
 ```
 Evaluate the model outputs generated from our EHRNoteQA dataset using GPT as below. (located in scripts/evaluate.sh)
 ```
