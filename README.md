@@ -55,7 +55,13 @@ python ../src/generation/generate.py \
 Adjust the model and file names according to the target evaluation model and the processed EHRNoteQA file.
 
 ## Model Evaluation
-For model evaluation, ensure the environment variables are set as described above. Evaluation can be performed on non-HIPAA-compliant platforms as well, including the official OpenAI API.\
+Set the environment variables as previously described if not already done.\
+You must use HIPAA-compliant platforms such as Azure.
+```
+export AZURE_OPENAI_ENDPOINT=[Your Endpoint]
+export AZURE_OPENAI_KEY=[Your Key]
+export AZURE_API_VERSION=[Your API Version]
+```
 Use the following script to evaluate the model outputs generated from the EHRNoteQA dataset. (located in scripts/evaluate.sh)
 ```
 python ../src/evaluation/evaluate.py \
