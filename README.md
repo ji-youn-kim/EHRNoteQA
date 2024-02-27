@@ -8,6 +8,25 @@
 This study introduces EHRNoteQA, a novel patient-specific question answering benchmark tailored for evaluating Large Language Models (LLMs) in clinical environments. Based on MIMIC-IV Electronic Health Record (EHR), a team of three medical professionals has curated the dataset comprising 962 unique questions, each linked to a specific patient's EHR clinical notes. What makes EHRNoteQA distinct from existing EHR-based benchmarks is as follows: Firstly, it is the first dataset to adopt a multi-choice question answering format, a design choice that effectively evaluates LLMs with reliable scores in the context of automatic evaluation, compared to other formats. Secondly, it requires an analysis of multiple clinical notes to answer a single question, reflecting the complex nature of real-world clinical decision-making where clinicians review extensive records of patient histories. Our comprehensive evaluation on various large language models showed that their scores on EHRNoteQA correlate more closely with their performance in addressing real-world medical questions evaluated by clinicians than their scores from other LLM benchmarks. This underscores the significance of EHRNoteQA in evaluating LLMs for medical applications and highlights its crucial role in facilitating the integration of LLMs into healthcare systems. The dataset will be made available to the public under PhysioNet credential access, promoting further research in this vital field.
 - Paper link: [EHRNoteQA: A Patient-Specific Question Answering Benchmark for Evaluating Large Language Models in Clinical Settings](https://arxiv.org/pdf/2402.16040.pdf)
 
+## Requirements
+```
+# Create the conda environment
+conda create -y -n EHRNoteQA python=3.10.4
+
+# Activate the environment
+source activate EHRNoteQA
+
+# Install required packages
+conda install -y pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch
+
+pip install pandas==1.4.3 \
+            openai==1.12.0 \
+            transformers==4.31.0 \
+            accelerate==0.21.0 \
+            tqdm==4.65.0 \
+            fire==0.5.0
+```
+
 ## Dataset
 The EHRNoteQA dataset will soon be accessible on Physionet. We will update this space with a direct link once it is available. \
 For early access, please email jiyoun.kim@kaist.ac.kr or sean0042@kaist.ac.kr with your Physionet credentials.\
