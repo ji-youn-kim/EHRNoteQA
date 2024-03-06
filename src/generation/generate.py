@@ -26,10 +26,11 @@ def main(
 			local_files_only=True
 		)
 
-		if "A6000" in torch.cuda.get_device_name():
-			max_memory = {i: "48GiB" for i in range(torch.cuda.device_count())}
-		elif "3090" in torch.cuda.get_device_name():
-			max_memory = {i: "24GiB" for i in range(torch.cuda.device_count())}
+		max_memory = {}
+		for i in range(torch.cuda.device_count()):
+			total_mem = torch.cuda.get_device_properties(i).total_memory
+			total_mem_gib = total_mem / (1024 ** 3)
+			max_memory[i] = f"{total_mem_gib:.0f}GiB"
 
 		model = AutoModelForCausalLM.from_pretrained(
 			os.path.join(ckpt_dir, model_name),
