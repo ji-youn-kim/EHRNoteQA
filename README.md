@@ -28,10 +28,9 @@ pip install pandas==1.4.3 \
 ```
 
 ## Dataset
-The EHRNoteQA dataset will soon be accessible on Physionet. We will update this space with a direct link once it is available. \
-For early access, please email jiyoun.kim@kaist.ac.kr or sean0042@kaist.ac.kr with your Physionet credentials.\
+The EHRNoteQA dataset is accessible on Physionet with your Physionet credentials. \
 To get started, download the following:
-1. The EHRNoteQA dataset.
+1. The [EHRNoteQA dataset](https://physionet.org/content/ehr-notes-qa-llms/1.0.0/).
 2. The discharge.csv.gz file from [MIMIC-IV-Note v2.2](https://physionet.org/content/mimic-iv-note/2.2/).
 <p align="center">
   <img src="https://github.com/ji-youn-kim/EHRNoteQA/blob/master/resources/figure2.png?raw=true" width="100%" height="auto">
