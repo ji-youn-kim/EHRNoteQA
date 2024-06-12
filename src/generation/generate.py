@@ -10,6 +10,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 def main(
 	ckpt_dir: str, # "Folder path to target model for evaluation. You may put an empty string when evaluating gpt series models."
 	model_name: str, # "Name of target model for evaluation."
+	eval_method: str, # "Evaluation method (openended or multichoice)"
 	input_path: str, # "Folder path to the processed EHRNoteQA data."
 	file_name: str, # "Name of the processed EHRNoteQA file."
 	save_path: str, # "Folder path to save target model generated output. "
@@ -58,11 +59,15 @@ def main(
 			note = note + f"[note {i+1} start]\n" + row[f"note_{i+1}"] + f"\n[note {i+1} end]"
 			if i < num_notes -1:
 				note = note + "\n\n"
+
+		if eval_method == "openended":
+			sample = {"note": note, "question": row["question"]}
     
-		sample = {"note": note, "question": row["question"], "choice_a": row["choice_A"], "choice_b": row["choice_B"],
-                    "choice_c": row["choice_C"], "choice_d": row["choice_D"], "choice_e": row["choice_E"]}
+		elif eval_method == "multichoice":
+			sample = {"note": note, "question": row["question"], "choice_a": row["choice_A"], "choice_b": row["choice_B"],
+						"choice_c": row["choice_C"], "choice_d": row["choice_D"], "choice_e": row["choice_E"]}
 	
-		text = get_prompt(model_name).format_map(sample)
+		text = get_prompt(eval_method, model_name).format_map(sample)
 
 		if "gpt" in model_name:
 			message = generate_prompt(text)
@@ -88,8 +93,7 @@ def main(
 		count +=1
 
 		data.at[idx, model_name] = result
-		data.to_csv(os.path.join(save_path, f'ours_{model_name}_{file_name.split(".")[0]}.csv'), index=False)
-
+		data.to_csv(os.path.join(save_path, f'ours_{eval_method}_{model_name}_{file_name.split(".")[0]}.csv'), index=False)
 
 if __name__ == "__main__":
 	fire.Fire(main)
