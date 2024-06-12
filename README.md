@@ -1,11 +1,16 @@
-# EHRNoteQA: A Patient-Specific Question Answering Benchmark for Evaluating Large Language Models in Clinical Settings
-
-<p align="center">
-  <img src="https://github.com/ji-youn-kim/EHRNoteQA/blob/master/resources/figure1.png?raw=true" width="400"/>
-</p>
-
+# EHRNoteQA: An LLM Benchmark for Real-World Clinical Practice Using Discharge Summaries
 ## Overview
-This study introduces EHRNoteQA, a novel patient-specific question answering benchmark tailored for evaluating Large Language Models (LLMs) in clinical environments. Based on MIMIC-IV Electronic Health Record (EHR), a team of three medical professionals has curated the dataset comprising 962 unique questions, each linked to a specific patient's EHR clinical notes. What makes EHRNoteQA distinct from existing EHR-based benchmarks is as follows: Firstly, it is the first dataset to adopt a multi-choice question answering format, a design choice that effectively evaluates LLMs with reliable scores in the context of automatic evaluation, compared to other formats. Secondly, it requires an analysis of multiple clinical notes to answer a single question, reflecting the complex nature of real-world clinical decision-making where clinicians review extensive records of patient histories. Our comprehensive evaluation on various large language models showed that their scores on EHRNoteQA correlate more closely with their performance in addressing real-world medical questions evaluated by clinicians than their scores from other LLM benchmarks. This underscores the significance of EHRNoteQA in evaluating LLMs for medical applications and highlights its crucial role in facilitating the integration of LLMs into healthcare systems. The dataset will be made available to the public under PhysioNet credential access, promoting further research in this vital field.
+Discharge summaries in Electronic Health Records (EHRs) are crucial for clinical decision-making, but their length and complexity make information extraction challenging, especially when dealing with accumulated summaries across multiple patient admissions.
+Large Language Models (LLMs) show promise in addressing this challenge by efficiently analyzing vast and complex data.
+Existing benchmarks, however, fall short in properly evaluating LLMs' capabilities in this context, as they typically focus on single-note information or limited topics, failing to reflect the real-world inquiries required by clinicians.
+To bridge this gap, we introduce EHRNoteQA, a novel benchmark built on the MIMIC-IV EHR, comprising 962 different QA pairs each linked to distinct patients' discharge summaries.
+Every QA pair is initially generated using GPT-4 and then manually reviewed and refined by three clinicians to ensure clinical relevance.
+EHRNoteQA includes questions that require information across multiple discharge summaries and covers eight diverse topics, mirroring the complexity and diversity of real clinical inquiries.
+We offer EHRNoteQA in two formats: open-ended and multi-choice question answering, and propose a reliable evaluation method for each.
+We evaluate 27 LLMs using EHRNoteQA and examine various factors affecting the model performance (*e.g., the length and number of discharge summaries*).
+Furthermore, to validate EHRNoteQA as a reliable proxy for expert evaluations in clinical practice, we measure the correlation between the LLM performance on EHRNoteQA, and the LLM performance manually evaluated by clinicians.
+Results show that LLM performance on EHRNoteQA have higher correlation with clinician-evaluated performance (Spearman: 0.78, Kendall: 0.62) compared to other benchmarks, demonstrating its practical relevance in evaluating LLMs in clinical settings.
+EHRNoteQA will be publicly available to support further research and improve LLM evaluation in clinical practice.
 - Paper link: [EHRNoteQA: A Patient-Specific Question Answering Benchmark for Evaluating Large Language Models in Clinical Settings](https://arxiv.org/pdf/2402.16040.pdf)
 
 ## Requirements
@@ -33,9 +38,9 @@ To get started, download the following:
 1. The [EHRNoteQA dataset](https://physionet.org/content/ehr-notes-qa-llms/1.0.0/).
 2. The discharge.csv.gz file from [MIMIC-IV-Note v2.2](https://physionet.org/content/mimic-iv-note/2.2/).
 <p align="center">
-  <img src="https://github.com/ji-youn-kim/EHRNoteQA/blob/master/resources/figure2.png?raw=true" width="100%" height="auto">
+  <img src="https://github.com/ji-youn-kim/EHRNoteQA/blob/master/resources/figure1.png?raw=true" width="600"/>
   <br>
-  <div align="center">Overview of EHRNoteQA Data Generation Pipeline</div>
+  <div align="center">Overview of EHRNoteQA Data Construction Process</div>
 </p>
 
 ## Preparing the Data
@@ -63,6 +68,7 @@ You may generate model outputs of the EHRNoteQA dataset as below. (located in sc
 CUDA_VISIBLE_DEVICES=0 python ../src/generation/generate.py \
 --ckpt_dir [Folder path to target model for evaluation] \
 --model_name Llama-2-7b-chat-hf \
+--eval_method [Evaluation Method - choose from 'openended', 'multichoice'] \
 --input_path [Folder path to the processed EHRNoteQA data] \
 --file_name EHRNoteQA_processed.jsonl \
 --save_path [Folder path to save target model generated output]
@@ -71,6 +77,7 @@ CUDA_VISIBLE_DEVICES=0 python ../src/generation/generate.py \
 python ../src/generation/generate.py \
 --ckpt_dir "" \
 --model_name gpt-4-1106-preview \
+--eval_method [Evaluation Method - choose from 'openended', 'multichoice'] \
 --input_path [Folder path to the processed EHRNoteQA data] \
 --file_name EHRNoteQA_processed.jsonl \
 --save_path [Folder path to save target model generated output]
@@ -90,6 +97,7 @@ Use the following script to evaluate the model outputs generated from the EHRNot
 python ../src/evaluation/evaluate.py \
 --gpt_type gpt-4-1106-preview \
 --model_name Llama-2-7b-chat-hf \
+--eval_method [Evaluation Method - choose from 'openended', 'multichoice'] \
 --input_path [Folder path to target model generated output] \
 --file_name ours_Llama-2-7b-chat-hf_EHRNoteQA_processed.csv \
 --save_path [Folder path to save GPT evaluated result of target model output]
