@@ -11,7 +11,7 @@ We evaluate 27 LLMs using EHRNoteQA and examine various factors affecting the mo
 Furthermore, to validate EHRNoteQA as a reliable proxy for expert evaluations in clinical practice, we measure the correlation between the LLM performance on EHRNoteQA, and the LLM performance manually evaluated by clinicians.
 Results show that LLM performance on EHRNoteQA have higher correlation with clinician-evaluated performance (Spearman: 0.78, Kendall: 0.62) compared to other benchmarks, demonstrating its practical relevance in evaluating LLMs in clinical settings.
 EHRNoteQA will be publicly available to support further research and improve LLM evaluation in clinical practice.
-- Paper link: [EHRNoteQA: A Patient-Specific Question Answering Benchmark for Evaluating Large Language Models in Clinical Settings](https://arxiv.org/pdf/2402.16040.pdf)
+- Paper link: [EHRNoteQA: An LLM Benchmark for Real-World Clinical Practice Using Discharge Summaries](https://arxiv.org/pdf/2402.16040.pdf)
 
 ## Requirements
 ```
@@ -107,12 +107,12 @@ Adjust the names for the GPT model used for evaluation (gpt type), the model who
 ## Citation
 ```
 @misc{kweon2024ehrnoteqa,
-      title={EHRNoteQA: A Patient-Specific Question Answering Benchmark for Evaluating Large Language Models in Clinical Settings}, 
-      author={Sunjun Kweon and Jiyoun Kim and Heeyoung Kwak and Dongchul Cha and Hangyul Yoon and Kwanghyun Kim and Seunghyun Won and Edward Choi},
+      title={EHRNoteQA: An LLM Benchmark for Real-World Clinical Practice Using Discharge Summaries}, 
+      author={Sunjun Kweon and Jiyoun Kim and Heeyoung Kwak and Dongchul Cha and Hangyul Yoon and Kwanghyun Kim and Jeewon Yang and Seunghyun Won and Edward Choi},
       year={2024},
       eprint={2402.16040},
       archivePrefix={arXiv},
-      primaryClass={cs.CL}
+      primaryClass={id='cs.CL' full_name='Computation and Language' is_active=True alt_name='cmp-lg' in_archive='cs' is_general=False description='Covers natural language processing. Roughly includes material in ACM Subject Class I.2.7. Note that work on artificial languages (programming languages, logics, formal systems) that does not explicitly address natural-language issues broadly construed (natural-language processing, computational linguistics, speech, text retrieval, etc.) is not appropriate for this area.'}
 }
 ```
 
