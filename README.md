@@ -1,5 +1,5 @@
 # EHRNoteQA: An LLM Benchmark for Real-World Clinical Practice Using Discharge Summaries
-[NeurIPS 2024 D&B] Official code for [EHRNoteQA: An LLM Benchmark for Real-World Clinical Practice Using Discharge Summaries](https://arxiv.org/pdf/2402.16040.pdf).
+[NeurIPS 2024 D&B] Official code for [EHRNoteQA: An LLM Benchmark for Real-World Clinical Practice Using Discharge Summaries](https://arxiv.org/abs/2402.16040).
 ## Overview
 Discharge summaries in Electronic Health Records (EHRs) are crucial for clinical decision-making, but their length and complexity make information extraction challenging, especially when dealing with accumulated summaries across multiple patient admissions.
 Large Language Models (LLMs) show promise in addressing this challenge by efficiently analyzing vast and complex data.
